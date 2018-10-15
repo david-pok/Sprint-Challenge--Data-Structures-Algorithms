@@ -1,37 +1,30 @@
-def heapify(arr, n, i): 
-    largest = i # Initialize largest as root 
-    l = 2 * i + 1     # left = 2*i + 1 
-    r = 2 * i + 2     # right = 2*i + 2 
-  
-    # See if left child of root exists and is 
-    # greater than root 
-    if l < n and arr[i] < arr[l]: 
-        largest = l 
-  
-    # See if right child of root exists and is 
-    # greater than root 
-    if r < n and arr[largest] < arr[r]: 
-        largest = r 
-  
-    # Change root, if needed 
-    if largest != i: 
-        arr[i],arr[largest] = arr[largest],arr[i] # swap 
-  
-        # Heapify the root. 
-        heapify(arr, n, largest) 
+# heaps will take an unsorted list and put them in a tree
+# heap will send the largest number to the top and put them
+# in a sorted list
+# send the largest number to the top again and put it in the
+# sorted list
+
 
 def heapsort(arr):
-    n = len(arr)
-    # Build max heap
-    for i in range(n, 0, -1):
-            heapify(arr, n, i)
+    heap = Heap()
+    # initializes sorted into an array full of 0 in the length
+    # the array input
+    sorted = [0 for _ in range(len(arr))]
+    # THIS DOES THE SAME EXACT THING
+    # sorted = [0] * len(arr)
 
-    for i in range(n-1, 0, -1):
-            # swap
-      arr[i], arr[0] = arr[0], arr[i]
+    for el in arr:
+        heap.insert(el)
 
-            # heapify root element
-      heapify(arr, i, 0)
+    for i in range(len(arr)):
+        sorted[len(arr) - i - 1] = heap.delete()
+        #this will take the element from hea.delete
+        #and put it into our sorted array in the last index
+        #and will put elements in backwards so we dont have to
+        #reverse our sorted array later
+        #fancy
+
+    return sorted
 
 
 class Heap:
